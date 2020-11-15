@@ -1,0 +1,201 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[top = 1.6cm, left = 2.7cm, right = 2.7cm ]{geometry}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+\usepackage{cite}
+%\usepackage{bbm}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{rotating}
+%\usepackage[noend]{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{minted}
+\usepackage{cprotect}
+\usepackage{caption}
+\usepackage{fancyvrb}
+\usepackage{afterpage}
+\usepackage{subcaption}
+\usepackage{hyperref}
+%\usepackage[noend]{algcompatible}
+\colorlet{shadecolor}{lightgray!25}
+
+%% ALGORITHME
+
+%\floatname{algorithm}{Algorithme}
+%\renewcommand{\algorithmicrequire}{\textbf{Entrée :}}
+%\renewcommand{\algorithmicensure}{\textbf{Sortie :}}
+%\renewcommand{\algorithmicif}{\textbf{si}}
+%\renewcommand{\algorithmicthen}{\textbf{alors}}
+%\renewcommand{\algorithmicelse}{\textbf{sinon}}
+%\renewcommand{\algorithmicelsif}{\textbf{sinon si}}
+%\renewcommand{\algorithmicwhile}{\textbf{tant que}}
+%\renewcommand{\algorithmicdo}{\textbf{faire}}
+%\renewcommand{\algorithmicend}{\textbf{fin}}
+%\renewcommand{\algorithmicreturn}{\textbf{retourner}}
+%\renewcommand{\algorithmicfor}{\textbf{pour}}
+%\renewcommand{\algorithmicforall}{\textbf{pour tout}}
+
+
+\renewcommand{\thefootnote}{\textit{\alph{footnote}}}
+%% Theorem Styles %%
+
+\theoremstyle{definition}%{3pt}{3pt}{\slshape}{}{\bfseries}{.}{.5em}{}
+\newtheorem{definition}{Définition}[chapter]
+\newtheorem{theorem}{Théorème}[chapter]
+\newtheorem{lemma}{Lemme}[chapter]
+\newtheorem*{notation}{Notation}
+\newtheorem*{notations}{Notations}
+\newtheorem{propriete}{Propriété}[chapter]
+\newtheorem*{proprietes}{Propriétés}
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{corollaire}{Corollaire}[chapter]
+\theoremstyle{remark}
+\newtheorem{example}{Exemple}[chapter]
+\newtheorem{remark}{Remarque}[chapter]
+
+%%Definition by chapter%%
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\thmtlo@chaptervspacehack
+{\addtocontents{loe}{\protect\addvspace{10\p@}}}
+{\addtocontents{loe}{\protect\thmlopatch@endchapter\protect\thmlopatch@chapter{\thechapter}}}
+{}{}
+\AtEndDocument{\addtocontents{loe}{\protect\thmlopatch@endchapter}}
+\long\def\thmlopatch@chapter#1#2\thmlopatch@endchapter{%
+	\setbox\z@=\vbox{#2}%
+	\ifdim\ht\z@>\z@
+	\hbox{\bfseries\chaptername\ #1}\nobreak
+	#2
+	\addvspace{10\p@}
+	\fi
+}
+\def\thmlopatch@endchapter{}
+
+\makeatother
+\renewcommand{\thmtformatoptarg}[1]{ -- #1}
+
+%% Commandes persos %%
+\newcommand\bbone{\ensuremath{\mathbbm{1}}}
+\newcommand{\eg}{e.g., }
+\newcommand{\ssi}{ssi }
+\newcommand{\ie}{i.e., }
+\newcommand{\cf}{cf. }
+\newcommand{\pr}{\mathbb{P}}
+\renewcommand{\listtheoremname}{Définitions et théorèmes}
+
+\setstretch{1,1}
+\let\labelitemi\labelitemii
+
+
+\begin{document}
+\begin{titlepage}
+
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+	\center % Center everything on the page
+	%----------------------------------------------------------------------------------------
+	%	HEADING SECTIONS
+	%----------------------------------------------------------------------------------------
+
+
+	\begin{center}
+	\includegraphics[height=2cm]{logos/UMONS_FS.pdf}
+	\hspace{5cm}
+	\includegraphics[height=1.7cm]{logos/UMONS+txt}
+	\\[1em]
+	\vspace{1cm}
+	\end{center}
+	\textsc{\large Service de génie logiciel }\\[0.5cm] % Major heading such as course name
+
+	%\vspace{1cm}
+	%----------------------------------------------------------------------------------------
+	%	TITLE SECTION
+	%----------------------------------------------------------------------------------------
+
+	\vspace{0.5cm}
+	\HRule \\[0.4cm]
+	{\huge \bfseries \centering \quad Empirical Analysis of Development Bots in Social Coding Repositories}\\[0.4cm] % Title of your document
+	\HRule \\[1cm]
+	%{\large Projet de Master 1}
+
+	%----------------------------------------------------------------------------------------
+	%	AUTHOR SECTION//
+	%----------------------------------------------------------------------------------------
+	\vspace{2cm}
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft} \large
+			\emph{Auteur :} \\Robin Willième
+		\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushright} \large
+			\quad \\
+			\emph{Directeurs:}\\ \quad Tom Mens \\ \quad Alexandre Decan\\	\vspace*{0.5cm}
+			%\emph{Rapporteur:}\\
+			%Quentin Hautem
+		\end{flushright}
+
+	\end{minipage}\\[5cm]
+
+	% If you don't want a supervisor, uncomment the two lines below and remove the section above
+	%\Large \emph{Author:}\\
+	%John \textsc{Smith}\\[3cm] % Your name
+
+	%----------------------------------------------------------------------------------------
+	%	DATE SECTION
+	%----------------------------------------------------------------------------------------
+	\vspace{3.7cm}
+	%{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+	\begin{center}
+			Ann\'ee acad\'emique 2019-2020
+	\end{center}
+
+	%----------------------------------------------------------------------------------------
+	%	LOGO SECTION
+	%----------------------------------------------------------------------------------------
+	%----------------------------------------------------------------------------------------
+
+	\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+%\pagenumbering{gobble}
+%\shipout\null
+%\begin{flushright}
+%{\Large \textbf{Remerciements}} \\
+%\end{flushright}
+
+\begin{flushright}
+Je remercie toutes les personnes 
+\end{flushright}
+%\thispagestyle{empty}
+
+\afterpage{\null\newpage}
+
+\tableofcontents
+
+\afterpage{\null\newpage}
+
+\chapter{Introduction}
+\pagenumbering{arabic}
+
+\chapter{Etat de l'art}
+
+
+\bibliographystyle{plain}
+\bibliography{bibli}
+
+\end{document}
